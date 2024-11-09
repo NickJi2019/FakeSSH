@@ -1,5 +1,0 @@
-product: jvm/app
-
-dependencies:
-  - "org.apache.sshd:sshd-core:+"
-  - "org.apache.commons:commons-csv:+"

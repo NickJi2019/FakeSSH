@@ -1,4 +1,4 @@
-
+package com.woznes.fakeSSH
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVPrinter
 import org.apache.sshd.common.keyprovider.KeyPairProvider
@@ -11,11 +11,8 @@ import java.nio.file.Paths
 import java.security.KeyPairGenerator
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.logging.FileHandler
-import java.util.logging.Logger
-import java.util.logging.SimpleFormatter
 
-val logger = Logger.getLogger("FakeSSHLogger")
+
 const val csvFilePath = "fakeSSH.csv"
 
 fun setupCsvFile() {
@@ -48,7 +45,6 @@ fun getCurrentTime(): String {
 }
 
 fun logAttempt(address: String, username: String, password: String) {
-    logger.info("Attempt from: ${address}, Username: $username, Password: $password")
     println("${getCurrentTime()} Attempt from: ${address}, Username: $username, Password: $password")
     logAttemptToCsv(username, password)
 }
@@ -61,14 +57,13 @@ val generateRandomKeyPair= {s: SessionContext ->
 fun startSshServerWithAuth() {
     val sshd = SshServer.setUpDefaultServer()
     sshd.port = 2222
-    sshd.keyPairProvider = KeyPairProvider { generateRandomKeyPair(it) }
-//    sshd.serverVersion = "SSH-2.0-OpenSSH_8.0"
-
+    sshd.setKeyPairProvider(new SimpleGeneratorHostKeyProvider())
+    
     sshd.passwordAuthenticator = PasswordAuthenticator { username, password, session ->
         logAttempt(session.clientAddress.toString(), username, password)
         false
     }
-    
+
 
     try {
         sshd.start()

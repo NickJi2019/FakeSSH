@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FakeSSH.commonMain.iml" filepath="$PROJECT_DIR$/.idea/modules/FakeSSH.commonMain.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FakeSSH.commonTest.iml" filepath="$PROJECT_DIR$/.idea/modules/FakeSSH.commonTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FakeSSH.main.iml" filepath="$PROJECT_DIR$/.idea/modules/FakeSSH.main.iml" />
     </modules>
   </component>
 </project>
